@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>You're In — Blackburn Wealth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light only;
+  --bg: #F4F1EA;
+  --ink: #0D0D0D;
+  --soft-ink: #1F1F1F;
+  --gray: #6B6B6B;
+  --light-gray: #B8B5AE;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: #F4F1EA !important;
+  color: #0D0D0D !important;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  padding: 0;
+  background-color: #F4F1EA !important;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(0,0,0,0.015) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.masthead {
+  text-align: center;
+  padding: 56px 24px 6px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #0D0D0D;
+  position: relative;
+  z-index: 2;
+}
+
+.masthead-rule {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.masthead-rule::before, .masthead-rule::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: #0D0D0D;
+  margin: 6px 0;
+}
+
+.masthead-rule::after {
+  margin-top: 3px;
+}
+
+.dateline {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #6B6B6B;
+  padding: 12px 24px 0;
+  font-style: italic;
+  position: relative;
+  z-index: 2;
+}
+
+main {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 64px 32px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom: 18px;
+  color: #0D0D0D;
+}
+
+.subhead {
+  text-align: center;
+  font-style: italic;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: #1F1F1F;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+.section-rule {
+  width: 50px;
+  height: 1px;
+  background: #0D0D0D;
+  margin: 32px auto;
+}
+
+.body-copy {
+  font-size: 19px;
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  color: #0D0D0D;
+}
+
+.body-copy p {
+  margin-bottom: 22px;
+}
+
+.body-copy em {
+  font-style: italic;
+}
+
+.things-to-do {
+  margin: 36px 0;
+  padding: 28px 0 28px;
+  border-top: 1px solid #B8B5AE;
+  border-bottom: 1px solid #B8B5AE;
+}
+
+.things-to-do-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #6B6B6B;
+  margin-bottom: 22px;
+  font-weight: 500;
+}
+
+.thing {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  padding-left: 28px;
+  position: relative;
+  color: #0D0D0D;
+}
+
+.thing:last-child {
+  margin-bottom: 0;
+}
+
+.thing::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #6B6B6B;
+}
+
+.benediction {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.4;
+  text-align: center;
+  color: #0D0D0D;
+  margin: 48px 0 8px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+.benediction::before, .benediction::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: #0D0D0D;
+  margin: 24px auto;
+}
+
+.signature-block {
+  margin-top: 24px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #6B6B6B;
+}
+
+.signature-block a {
+  color: #0D0D0D;
+  text-decoration: none;
+  border-bottom: 1px solid #0D0D0D;
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+
+.signature-block a:hover {
+  opacity: 0.7;
+}
+
+.return-link {
+  text-align: center;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid #B8B5AE;
+}
+
+.return-link a {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #6B6B6B;
+  text-decoration: none;
+  border-bottom: 1px solid #B8B5AE;
+  padding-bottom: 3px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.return-link a:hover {
+  color: #0D0D0D;
+  border-bottom-color: #0D0D0D;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 48px;
+  }
+  main {
+    padding: 48px 24px 64px;
+  }
+  .body-copy {
+    font-size: 18px;
+  }
+  .thing {
+    font-size: 17px;
+  }
+  .benediction {
+    font-size: 20px;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead-rule"></div>
+<div class="masthead">Blackburn Wealth</div>
+<div class="masthead-rule"></div>
+<div class="dateline">A quiet second voice on the original meaning of wealth.</div>
+
+<main>
+  <h1>You're in.</h1>
+  <p class="subhead">The confirmation is complete.</p>
+
+  <div class="section-rule"></div>
+
+  <div class="body-copy">
+    <p>You are now on a small list of readers who will receive occasional letters on identity, legacy, flow — and what wealth was supposed to mean.</p>
+
+    <p>There is no schedule. The letters arrive when there is something worth saying. Some will be short. Some will be long. None will waste your time.</p>
+  </div>
+
+  <div class="things-to-do">
+    <div class="things-to-do-label">In the meantime</div>
+    <p class="thing">Read through the writing on this site if you haven't already, and let the teaching settle.</p>
+    <p class="thing">Forward the site to one person in your life who would benefit from a quieter voice on this subject.</p>
+    <p class="thing">Sit with the question that brought you here. The original meaning of wealth is recovered not by reading about it, but by living into it.</p>
+  </div>
+
+  <p class="benediction">Welcome.</p>
+
+  <div class="signature-block">
+    <a href="https://jamesjblackburn.com" target="_blank" rel="noopener">James Blackburn</a>
+  </div>
+
+  <div class="return-link">
+    <a href="https://blackburnwealth.com">Return to Blackburn Wealth</a>
+  </div>
+</main>
+
+</body>
+</html>
