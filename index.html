@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-<!-- reCAPTCHA v2 script -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <style>
 :root {
@@ -20,13 +19,7 @@
   --gray: #6B6B6B;
   --light-gray: #B8B5AE;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
 html, body {
   background: #F4F1EA !important;
   color: #0D0D0D !important;
@@ -35,730 +28,279 @@ html, body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-
-body {
-  min-height: 100vh;
-  padding: 0;
-  background-color: #F4F1EA !important;
-  position: relative;
-}
-
+body { min-height: 100vh; padding: 0; background-color: #F4F1EA !important; position: relative; }
 body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
   background-image:
     radial-gradient(circle at 25% 25%, rgba(0,0,0,0.015) 1px, transparent 1px),
     radial-gradient(circle at 75% 75%, rgba(0,0,0,0.015) 1px, transparent 1px);
   background-size: 3px 3px, 5px 5px;
-  pointer-events: none;
-  z-index: 1;
+  pointer-events: none; z-index: 1;
 }
-
 .email-bar {
-  background: #0D0D0D;
-  color: #F4F1EA;
-  padding: 14px 24px;
-  text-align: center;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  font-weight: 300;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-  z-index: 2;
+  background: #0D0D0D; color: #F4F1EA; padding: 14px 24px;
+  text-align: center; font-size: 13px; letter-spacing: 0.08em; font-weight: 300;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  position: relative; z-index: 2;
 }
-
 .email-bar .label {
-  text-transform: uppercase;
-  font-family: 'Playfair Display', serif;
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  opacity: 0.7;
+  text-transform: uppercase; font-family: 'Playfair Display', serif;
+  font-size: 10px; letter-spacing: 0.22em; opacity: 0.7;
 }
-
 .email-bar .label-italic {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  opacity: 0.55;
-  font-weight: 300;
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 12px; letter-spacing: 0.04em; opacity: 0.55; font-weight: 300;
 }
-
-.email-form {
-  display: flex;
-  width: 100%;
-  max-width: 360px;
-  gap: 0;
-}
-
+.email-form { display: flex; width: 100%; max-width: 360px; gap: 0; }
 .email-form input {
-  flex: 1;
-  background: transparent;
-  border: 1px solid #F4F1EA;
-  border-right: none;
-  color: #F4F1EA;
-  padding: 10px 14px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
-  letter-spacing: 0.02em;
-  outline: none;
+  flex: 1; background: transparent; border: 1px solid #F4F1EA; border-right: none;
+  color: #F4F1EA; padding: 10px 14px; font-family: 'Cormorant Garamond', serif;
+  font-size: 14px; letter-spacing: 0.02em; outline: none;
 }
-
-.email-form input::placeholder {
-  color: rgba(244, 241, 234, 0.45);
-  font-style: italic;
-}
-
+.email-form input::placeholder { color: rgba(244, 241, 234, 0.45); font-style: italic; }
 .email-form button {
-  background: #F4F1EA;
-  color: #0D0D0D;
-  border: 1px solid #F4F1EA;
-  padding: 10px 18px;
-  font-family: 'Playfair Display', serif;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: 500;
-  transition: opacity 0.2s;
+  background: #F4F1EA; color: #0D0D0D; border: 1px solid #F4F1EA;
+  padding: 10px 18px; font-family: 'Playfair Display', serif;
+  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  cursor: pointer; font-weight: 500; transition: opacity 0.2s;
 }
-
-.email-form button:hover {
-  opacity: 0.85;
-}
-
+.email-form button:hover { opacity: 0.85; }
+.email-form button:disabled { opacity: 0.5; cursor: not-allowed; }
 .email-confirm {
-  display: none;
-  font-size: 14px;
-  padding: 14px 20px;
-  border: 1px solid rgba(244, 241, 234, 0.35);
-  border-radius: 2px;
-  max-width: 360px;
-  margin: 0 auto;
-  text-align: center;
-  line-height: 1.5;
+  display: none; font-size: 14px; padding: 14px 20px;
+  border: 1px solid rgba(244, 241, 234, 0.35); border-radius: 2px;
+  max-width: 360px; margin: 0 auto; text-align: center; line-height: 1.5;
 }
-
 .email-confirm .confirm-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  opacity: 0.75;
-  display: block;
-  margin-bottom: 8px;
+  font-family: 'Playfair Display', serif; font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; opacity: 0.75; display: block; margin-bottom: 8px;
 }
-
 .email-confirm .confirm-body {
-  font-style: italic;
-  opacity: 0.95;
-  display: block;
-  font-size: 14px;
-  letter-spacing: 0.01em;
+  font-style: italic; opacity: 0.95; display: block; font-size: 14px; letter-spacing: 0.01em;
 }
-
-.email-confirm.visible {
-  display: block;
+.email-confirm.visible { display: block; }
+.email-error {
+  display: none; font-style: italic; font-size: 13px; margin-top: 8px;
+  opacity: 0.85; color: #F4F1EA;
 }
-
+.email-error.visible { display: block; }
 .masthead {
-  text-align: center;
-  padding: 36px 24px 6px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: #0D0D0D;
-  position: relative;
-  z-index: 2;
+  text-align: center; padding: 36px 24px 6px; font-family: 'Playfair Display', serif;
+  font-weight: 700; font-size: 13px; letter-spacing: 0.42em; text-transform: uppercase;
+  color: #0D0D0D; position: relative; z-index: 2;
 }
-
-.masthead-rule {
-  max-width: 580px;
-  margin: 0 auto;
-  padding: 0 32px;
-  position: relative;
-  z-index: 2;
-}
-
-.masthead-rule::before, .masthead-rule::after {
-  content: '';
-  display: block;
-  height: 1px;
-  background: #0D0D0D;
-  margin: 6px 0;
-}
-
-.masthead-rule::after {
-  margin-top: 3px;
-}
-
+.masthead-rule { max-width: 580px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+.masthead-rule::before, .masthead-rule::after { content: ''; display: block; height: 1px; background: #0D0D0D; margin: 6px 0; }
+.masthead-rule::after { margin-top: 3px; }
 .dateline {
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: #6B6B6B;
-  padding: 12px 24px 0;
-  font-style: italic;
-  position: relative;
-  z-index: 2;
+  text-align: center; font-family: 'Playfair Display', serif; font-size: 10px;
+  letter-spacing: 0.25em; text-transform: uppercase; color: #6B6B6B;
+  padding: 12px 24px 0; font-style: italic; position: relative; z-index: 2;
 }
-
-main {
-  max-width: 580px;
-  margin: 0 auto;
-  padding: 48px 32px 80px;
-  position: relative;
-  z-index: 2;
-}
-
+main { max-width: 580px; margin: 0 auto; padding: 48px 32px 80px; position: relative; z-index: 2; }
 h1 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 56px;
-  line-height: 1.0;
-  letter-spacing: -0.015em;
-  text-align: center;
-  margin-bottom: 18px;
-  color: #0D0D0D;
+  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 56px;
+  line-height: 1.0; letter-spacing: -0.015em; text-align: center;
+  margin-bottom: 18px; color: #0D0D0D;
 }
-
-h1 em {
-  font-style: italic;
-  font-weight: 400;
-  color: #1F1F1F;
-}
-
+h1 em { font-style: italic; font-weight: 400; color: #1F1F1F; }
 .subhead {
-  text-align: center;
-  font-style: italic;
-  font-size: 19px;
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  color: #1F1F1F;
-  opacity: 0.85;
-  margin-bottom: 8px;
+  text-align: center; font-style: italic; font-size: 19px; font-weight: 300;
+  letter-spacing: 0.02em; color: #1F1F1F; opacity: 0.85; margin-bottom: 8px;
 }
-
-.section-rule {
-  width: 50px;
-  height: 1px;
-  background: #0D0D0D;
-  margin: 32px auto;
-}
-
+.section-rule { width: 50px; height: 1px; background: #0D0D0D; margin: 32px auto; }
 .section-divider {
-  width: 100%;
-  height: 1px;
-  background: #B8B5AE;
-  margin: 64px 0 56px;
-  position: relative;
+  width: 100%; height: 1px; background: #B8B5AE; margin: 64px 0 56px; position: relative;
 }
-
 .section-divider::after {
-  content: '❦';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #F4F1EA;
-  padding: 0 18px;
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
-  color: #6B6B6B;
+  content: '❦'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: #F4F1EA; padding: 0 18px; font-family: 'Playfair Display', serif;
+  font-size: 18px; color: #6B6B6B;
 }
-
 .section-heading {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 42px;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  text-align: center;
-  margin-bottom: 12px;
-  color: #0D0D0D;
+  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 42px;
+  line-height: 1.05; letter-spacing: -0.01em; text-align: center;
+  margin-bottom: 12px; color: #0D0D0D;
 }
-
 .section-subhead {
-  text-align: center;
-  font-style: italic;
-  font-size: 17px;
-  font-weight: 300;
-  letter-spacing: 0.015em;
-  color: #1F1F1F;
-  opacity: 0.8;
+  text-align: center; font-style: italic; font-size: 17px; font-weight: 300;
+  letter-spacing: 0.015em; color: #1F1F1F; opacity: 0.8;
 }
-
 .body-copy strong {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  color: #0D0D0D;
-  font-style: normal;
-  letter-spacing: 0.005em;
+  font-family: 'Playfair Display', serif; font-weight: 700; color: #0D0D0D;
+  font-style: normal; letter-spacing: 0.005em;
 }
-
 .body-copy {
-  font-size: 19px;
-  line-height: 1.7;
-  font-weight: 400;
-  letter-spacing: 0.005em;
-  color: #0D0D0D;
+  font-size: 19px; line-height: 1.7; font-weight: 400;
+  letter-spacing: 0.005em; color: #0D0D0D;
 }
-
-.body-copy p {
-  margin-bottom: 20px;
-}
-
-.body-copy em {
-  font-style: italic;
-}
-
+.body-copy p { margin-bottom: 20px; }
+.body-copy em { font-style: italic; }
 .body-copy p:first-of-type::first-letter {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 64px;
-  float: left;
-  line-height: 0.9;
-  margin: 6px 8px -2px 0;
-  color: #0D0D0D;
+  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 64px;
+  float: left; line-height: 0.9; margin: 6px 8px -2px 0; color: #0D0D0D;
 }
-
 .pullquote {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 26px;
-  line-height: 1.3;
-  text-align: center;
-  margin: 40px 0;
-  font-weight: 400;
-  letter-spacing: -0.005em;
-  color: #0D0D0D;
+  font-family: 'Playfair Display', serif; font-style: italic; font-size: 26px;
+  line-height: 1.3; text-align: center; margin: 40px 0; font-weight: 400;
+  letter-spacing: -0.005em; color: #0D0D0D;
 }
-
 .pullquote::before, .pullquote::after {
-  content: '';
-  display: block;
-  width: 36px;
-  height: 1px;
-  background: #0D0D0D;
-  margin: 20px auto;
+  content: ''; display: block; width: 36px; height: 1px;
+  background: #0D0D0D; margin: 20px auto;
 }
-
 .signature-block {
-  margin-top: 56px;
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #6B6B6B;
-  padding-top: 32px;
-  border-top: 1px solid #B8B5AE;
+  margin-top: 56px; text-align: center; font-family: 'Playfair Display', serif;
+  font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: #6B6B6B; padding-top: 32px; border-top: 1px solid #B8B5AE;
 }
-
 .signature-block a {
-  color: #0D0D0D;
-  text-decoration: none;
-  border-bottom: 1px solid #0D0D0D;
-  padding-bottom: 2px;
-  transition: opacity 0.2s;
+  color: #0D0D0D; text-decoration: none; border-bottom: 1px solid #0D0D0D;
+  padding-bottom: 2px; transition: opacity 0.2s;
 }
-
-.signature-block a:hover {
-  opacity: 0.7;
-}
-
+.signature-block a:hover { opacity: 0.7; }
 .speaking {
-  margin-top: 36px;
-  font-style: italic;
-  font-size: 15px;
-  text-align: center;
-  color: #1F1F1F;
-  font-weight: 300;
-  letter-spacing: 0.01em;
+  margin-top: 36px; font-style: italic; font-size: 15px; text-align: center;
+  color: #1F1F1F; font-weight: 300; letter-spacing: 0.01em;
 }
-
-.speaking a {
-  color: #0D0D0D;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
-
-.speaking-block {
-  text-align: center;
-  margin: 0 auto;
-  padding: 8px 0 16px;
-}
-
-.speaking-block .section-heading {
-  font-size: 28px;
-  line-height: 1.15;
-  margin-bottom: 24px;
-}
-
+.speaking a { color: #0D0D0D; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.speaking-block { text-align: center; margin: 0 auto; padding: 8px 0 16px; }
+.speaking-block .section-heading { font-size: 28px; line-height: 1.15; margin-bottom: 24px; }
 .speaking-body {
-  font-size: 18px;
-  line-height: 1.65;
-  font-weight: 400;
-  color: #0D0D0D;
-  letter-spacing: 0.005em;
-  max-width: 480px;
-  margin: 0 auto 24px;
+  font-size: 18px; line-height: 1.65; font-weight: 400; color: #0D0D0D;
+  letter-spacing: 0.005em; max-width: 480px; margin: 0 auto 24px;
 }
-
 .speaking-cta {
-  font-style: italic;
-  font-size: 16px;
-  color: #1F1F1F;
-  letter-spacing: 0.01em;
-  font-weight: 300;
+  font-style: italic; font-size: 16px; color: #1F1F1F;
+  letter-spacing: 0.01em; font-weight: 300;
 }
-
 .speaking-cta a {
-  color: #0D0D0D;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-  font-style: normal;
+  color: #0D0D0D; text-decoration: underline; text-underline-offset: 3px;
+  cursor: pointer; font-style: normal;
 }
-
-/* CHORUS OF TRADITIONS */
 .chorus-intro {
-  font-size: 19px;
-  line-height: 1.7;
-  font-weight: 400;
-  letter-spacing: 0.005em;
-  color: #0D0D0D;
-  margin-bottom: 40px;
+  font-size: 19px; line-height: 1.7; font-weight: 400;
+  letter-spacing: 0.005em; color: #0D0D0D; margin-bottom: 40px;
 }
-
 .chorus-divider {
-  text-align: center;
-  margin: 48px 0 32px;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 16px;
-  color: #6B6B6B;
-  letter-spacing: 0.01em;
-  font-weight: 300;
+  text-align: center; margin: 48px 0 32px; font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 16px; color: #6B6B6B;
+  letter-spacing: 0.01em; font-weight: 300;
 }
-
 .chorus-divider::before, .chorus-divider::after {
-  content: '';
-  display: inline-block;
-  width: 36px;
-  height: 1px;
-  background: #B8B5AE;
-  vertical-align: middle;
-  margin: 0 16px;
+  content: ''; display: inline-block; width: 36px; height: 1px;
+  background: #B8B5AE; vertical-align: middle; margin: 0 16px;
 }
-
-.tradition {
-  margin-bottom: 36px;
-}
-
+.tradition { margin-bottom: 36px; }
 .tradition-label {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: #0D0D0D;
-  text-align: center;
-  margin-bottom: 16px;
-  padding-bottom: 8px;
+  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 12px;
+  letter-spacing: 0.32em; text-transform: uppercase; color: #0D0D0D;
+  text-align: center; margin-bottom: 16px; padding-bottom: 8px;
   border-bottom: 1px solid #B8B5AE;
 }
-
 .tradition-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 19px;
-  line-height: 1.55;
-  text-align: center;
-  color: #0D0D0D;
-  margin-bottom: 14px;
-  font-weight: 400;
-  letter-spacing: 0.003em;
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px;
+  line-height: 1.55; text-align: center; color: #0D0D0D; margin-bottom: 14px;
+  font-weight: 400; letter-spacing: 0.003em;
 }
-
 .tradition-quote .attribution {
-  display: block;
-  font-style: normal;
-  font-size: 13px;
-  letter-spacing: 0.05em;
-  color: #6B6B6B;
-  margin-top: 6px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 400;
+  display: block; font-style: normal; font-size: 13px; letter-spacing: 0.05em;
+  color: #6B6B6B; margin-top: 6px; font-family: 'Playfair Display', serif; font-weight: 400;
 }
-
 .chorus-close {
-  font-size: 19px;
-  line-height: 1.7;
-  font-weight: 400;
-  letter-spacing: 0.005em;
-  color: #0D0D0D;
-  margin-top: 48px;
-  text-align: center;
+  font-size: 19px; line-height: 1.7; font-weight: 400;
+  letter-spacing: 0.005em; color: #0D0D0D; margin-top: 48px; text-align: center;
 }
-
 .chorus-benediction {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 24px;
-  line-height: 1.4;
-  text-align: center;
-  color: #0D0D0D;
-  margin: 32px 0;
-  font-weight: 400;
-  letter-spacing: -0.005em;
+  font-family: 'Playfair Display', serif; font-style: italic; font-size: 24px;
+  line-height: 1.4; text-align: center; color: #0D0D0D; margin: 32px 0;
+  font-weight: 400; letter-spacing: -0.005em;
 }
-
 .chorus-benediction::before, .chorus-benediction::after {
-  content: '';
-  display: block;
-  width: 36px;
-  height: 1px;
-  background: #0D0D0D;
-  margin: 20px auto;
+  content: ''; display: block; width: 36px; height: 1px;
+  background: #0D0D0D; margin: 20px auto;
 }
-
-/* BOTTOM SUBSCRIBE BAR */
 .bottom-subscribe {
-  background: #0D0D0D;
-  color: #F4F1EA;
-  padding: 48px 24px 56px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
-  margin-top: 0;
+  background: #0D0D0D; color: #F4F1EA; padding: 48px 24px 56px;
+  text-align: center; position: relative; z-index: 2; margin-top: 0;
 }
-
 .bottom-subscribe .label {
-  text-transform: uppercase;
-  font-family: 'Playfair Display', serif;
-  font-size: 11px;
-  letter-spacing: 0.32em;
-  opacity: 0.7;
-  display: block;
-  margin-bottom: 14px;
-  font-weight: 500;
+  text-transform: uppercase; font-family: 'Playfair Display', serif;
+  font-size: 11px; letter-spacing: 0.32em; opacity: 0.7;
+  display: block; margin-bottom: 14px; font-weight: 500;
 }
-
 .bottom-subscribe .label-italic {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 17px;
-  letter-spacing: 0.01em;
-  opacity: 0.85;
-  font-weight: 300;
-  display: block;
-  max-width: 460px;
-  margin: 0 auto 24px;
-  line-height: 1.5;
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px;
+  letter-spacing: 0.01em; opacity: 0.85; font-weight: 300; display: block;
+  max-width: 460px; margin: 0 auto 24px; line-height: 1.5;
 }
-
-.bottom-subscribe .email-form {
-  margin: 0 auto;
-}
-
-.bottom-subscribe .email-confirm {
-  margin-top: 16px;
-}
-
-/* MODAL STYLES */
+.bottom-subscribe .email-form { margin: 0 auto; }
+.bottom-subscribe .email-confirm { margin-top: 16px; }
 .modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(13, 13, 13, 0.75);
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(13, 13, 13, 0.75); z-index: 100;
+  align-items: center; justify-content: center; padding: 20px;
   animation: fadeIn 0.25s ease;
 }
-
-.modal-overlay.visible {
-  display: flex;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
+.modal-overlay.visible { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .modal {
-  background: #F4F1EA;
-  width: 100%;
-  max-width: 520px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  padding: 48px 36px 36px;
-  border: 1px solid #0D0D0D;
-  animation: slideUp 0.3s ease;
+  background: #F4F1EA; width: 100%; max-width: 520px; max-height: 90vh;
+  overflow-y: auto; position: relative; padding: 48px 36px 36px;
+  border: 1px solid #0D0D0D; animation: slideUp 0.3s ease;
 }
-
 @keyframes slideUp {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
 .modal-close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  color: #0D0D0D;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
+  position: absolute; top: 14px; right: 14px;
+  background: transparent; border: none; cursor: pointer;
+  font-family: 'Playfair Display', serif; font-size: 24px; color: #0D0D0D;
+  width: 36px; height: 36px; display: flex; align-items: center;
+  justify-content: center; line-height: 1;
 }
-
 .modal h2 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 32px;
-  letter-spacing: -0.01em;
-  text-align: center;
-  margin-bottom: 8px;
-  color: #0D0D0D;
+  font-family: 'Playfair Display', serif; font-weight: 700; font-size: 32px;
+  letter-spacing: -0.01em; text-align: center; margin-bottom: 8px; color: #0D0D0D;
 }
-
 .modal-subtitle {
-  text-align: center;
-  font-style: italic;
-  font-size: 15px;
-  color: #1F1F1F;
-  opacity: 0.75;
-  margin-bottom: 28px;
+  text-align: center; font-style: italic; font-size: 15px;
+  color: #1F1F1F; opacity: 0.75; margin-bottom: 28px;
 }
-
-.modal-rule {
-  width: 40px;
-  height: 1px;
-  background: #0D0D0D;
-  margin: 0 auto 28px;
-}
-
-.modal form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
+.modal-rule { width: 40px; height: 1px; background: #0D0D0D; margin: 0 auto 28px; }
+.modal form { display: flex; flex-direction: column; gap: 16px; }
 .modal label {
-  font-family: 'Playfair Display', serif;
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #6B6B6B;
-  margin-bottom: 4px;
-  display: block;
+  font-family: 'Playfair Display', serif; font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: #6B6B6B; margin-bottom: 4px; display: block;
 }
-
 .modal input, .modal textarea {
-  width: 100%;
-  background: transparent;
-  border: 1px solid #B8B5AE;
-  color: #0D0D0D;
-  padding: 12px 14px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
-  letter-spacing: 0.01em;
-  outline: none;
-  transition: border-color 0.2s;
+  width: 100%; background: transparent; border: 1px solid #B8B5AE; color: #0D0D0D;
+  padding: 12px 14px; font-family: 'Cormorant Garamond', serif; font-size: 16px;
+  letter-spacing: 0.01em; outline: none; transition: border-color 0.2s;
 }
-
-.modal input:focus, .modal textarea:focus {
-  border-color: #0D0D0D;
-}
-
-.modal textarea {
-  min-height: 120px;
-  resize: vertical;
-  font-family: 'Cormorant Garamond', serif;
-}
-
-.recaptcha-wrap {
-  display: flex;
-  justify-content: center;
-  margin: 8px 0 4px;
-}
-
+.modal input:focus, .modal textarea:focus { border-color: #0D0D0D; }
+.modal textarea { min-height: 120px; resize: vertical; font-family: 'Cormorant Garamond', serif; }
+.recaptcha-wrap { display: flex; justify-content: center; margin: 8px 0 4px; }
 .form-status {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
-  font-style: italic;
-  color: #6B6B6B;
-  text-align: center;
-  min-height: 18px;
-  margin-top: 4px;
+  font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic;
+  color: #6B6B6B; text-align: center; min-height: 18px; margin-top: 4px;
 }
-
-.form-status.error {
-  color: #8B0000;
-}
-
+.form-status.error { color: #8B0000; }
 .modal button[type="submit"] {
-  background: #0D0D0D;
-  color: #F4F1EA;
-  border: none;
-  padding: 14px 24px;
-  font-family: 'Playfair Display', serif;
-  font-size: 12px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: 500;
-  margin-top: 8px;
+  background: #0D0D0D; color: #F4F1EA; border: none; padding: 14px 24px;
+  font-family: 'Playfair Display', serif; font-size: 12px; letter-spacing: 0.22em;
+  text-transform: uppercase; cursor: pointer; font-weight: 500; margin-top: 8px;
   transition: opacity 0.2s;
 }
-
-.modal button[type="submit"]:hover {
-  opacity: 0.85;
-}
-
-.modal button[type="submit"]:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.modal-success {
-  display: none;
-  text-align: center;
-  padding: 24px 0;
-}
-
-.modal-success.visible {
-  display: block;
-}
-
+.modal button[type="submit"]:hover { opacity: 0.85; }
+.modal button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; }
+.modal-success { display: none; text-align: center; padding: 24px 0; }
+.modal-success.visible { display: block; }
 .modal-success p {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 20px;
-  color: #0D0D0D;
-  line-height: 1.5;
+  font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px;
+  color: #0D0D0D; line-height: 1.5;
 }
-
 @media (max-width: 480px) {
   h1 { font-size: 46px; }
   main { padding: 36px 24px 60px; }
@@ -772,10 +314,11 @@ h1 em {
 <div class="email-bar">
   <span class="label">Subscribe to The Blackburn Wealth Letters</span>
   <span class="label-italic">On identity, legacy, flow — and what wealth was supposed to mean.</span>
-  <form class="email-form" id="emailForm" onsubmit="handleSubscribe(event)">
+  <form class="email-form" id="emailForm" onsubmit="handleSubscribe(event, 'top')">
     <input type="email" id="subscribeEmail" placeholder="your email — no spam ever" required>
-    <button type="submit">Subscribe</button>
+    <button type="submit" id="subscribeBtn">Subscribe</button>
   </form>
+  <div class="email-error" id="emailError"></div>
   <div class="email-confirm" id="emailConfirm">
     <span class="confirm-title">Almost there</span>
     <span class="confirm-body">Please check your inbox to confirm your subscription.</span>
@@ -1021,10 +564,11 @@ h1 em {
 <div class="bottom-subscribe">
   <span class="label">Subscribe to the Blackburn Wealth Letters</span>
   <span class="label-italic">On identity, legacy, flow — and what wealth was supposed to mean.</span>
-  <form class="email-form" id="emailFormBottom" onsubmit="handleSubscribeBottom(event)">
+  <form class="email-form" id="emailFormBottom" onsubmit="handleSubscribe(event, 'bottom')">
     <input type="email" id="subscribeEmailBottom" placeholder="your email — no spam ever" required>
-    <button type="submit">Subscribe</button>
+    <button type="submit" id="subscribeBtnBottom">Subscribe</button>
   </form>
+  <div class="email-error" id="emailErrorBottom"></div>
   <div class="email-confirm" id="emailConfirmBottom">
     <span class="confirm-title">Almost there</span>
     <span class="confirm-body">Please check your inbox to confirm your subscription.</span>
@@ -1059,7 +603,6 @@ h1 em {
           <textarea id="contactMessage" name="message" required></textarea>
         </div>
 
-        <!-- Google reCAPTCHA v2 widget -->
         <div class="recaptcha-wrap">
           <div class="g-recaptcha" data-sitekey="6Lf9IOosAAAAALN-Y48QL_rEChd990nKHh4KZdyh"></div>
         </div>
@@ -1080,9 +623,11 @@ h1 em {
 
 <script>
 // ============================================================
-// CONFIGURATION — yeh GHL webhook URL paste karo
+// CONFIGURATION — dono webhook URLs aur reCAPTCHA site key paste karo
 // ============================================================
-const GHL_CONTACT_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/FohjpNz4MKnwQfqqVb31/webhook-trigger/3c2299bf-cd11-4067-bc3f-46401a379394';
+const GHL_CONTACT_WEBHOOK    = 'https://services.leadconnectorhq.com/hooks/FohjpNz4MKnwQfqqVb31/webhook-trigger/3c2299bf-cd11-4067-bc3f-46401a379394
+';
+const GHL_NEWSLETTER_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/FohjpNz4MKnwQfqqVb31/webhook-trigger/45d87bcf-e922-47f4-ba39-01a56ddd96d1';
 // ============================================================
 
 function openModal() {
@@ -1093,7 +638,6 @@ function openModal() {
 function closeModal() {
   document.getElementById('contactModal').classList.remove('visible');
   document.body.style.overflow = '';
-  // Reset to form view in case user closes after success
   setTimeout(() => {
     document.getElementById('modalFormView').style.display = 'block';
     document.getElementById('modalSuccessView').classList.remove('visible');
@@ -1110,6 +654,7 @@ function closeModalIfOverlay(event) {
   }
 }
 
+// CONTACT FORM (Write to us) — sends to GHL contact workflow with captcha
 async function handleContact(event) {
   event.preventDefault();
 
@@ -1118,7 +663,6 @@ async function handleContact(event) {
   status.classList.remove('error');
   status.textContent = '';
 
-  // reCAPTCHA token check
   const captchaToken = window.grecaptcha && window.grecaptcha.getResponse();
   if (!captchaToken) {
     status.classList.add('error');
@@ -1160,25 +704,60 @@ async function handleContact(event) {
   }
 }
 
-function handleSubscribe(event) {
+// NEWSLETTER FORM (top + bottom) — sends email to GHL,
+// which applies tag and triggers confirmation email
+async function handleSubscribe(event, location) {
   event.preventDefault();
-  const email = document.getElementById('subscribeEmail').value;
-  // Developer hook: send email to newsletter service (Beehiiv, ConvertKit, Mailchimp, etc.)
-  // fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) })
-  document.getElementById('emailForm').style.display = 'none';
-  document.getElementById('emailConfirm').classList.add('visible');
+
+  const isBottom   = (location === 'bottom');
+  const emailInput = document.getElementById(isBottom ? 'subscribeEmailBottom' : 'subscribeEmail');
+  const formEl     = document.getElementById(isBottom ? 'emailFormBottom'     : 'emailForm');
+  const confirmEl  = document.getElementById(isBottom ? 'emailConfirmBottom'  : 'emailConfirm');
+  const errorEl    = document.getElementById(isBottom ? 'emailErrorBottom'    : 'emailError');
+  const btnEl      = document.getElementById(isBottom ? 'subscribeBtnBottom'  : 'subscribeBtn');
+
+  errorEl.classList.remove('visible');
+  errorEl.textContent = '';
+
+  const email = emailInput.value.trim();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errorEl.textContent = 'Please enter a valid email.';
+    errorEl.classList.add('visible');
+    return;
+  }
+
+  btnEl.disabled = true;
+  const originalLabel = btnEl.textContent;
+  btnEl.textContent = '…';
+
+  try {
+    const res = await fetch(GHL_NEWSLETTER_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        source: 'blackburnwealth.com',
+        form_location: location,
+      }),
+    });
+
+    if (res.ok) {
+      formEl.style.display = 'none';
+      confirmEl.classList.add('visible');
+    } else {
+      errorEl.textContent = 'Something went wrong. Please try again.';
+      errorEl.classList.add('visible');
+      btnEl.disabled = false;
+      btnEl.textContent = originalLabel;
+    }
+  } catch (err) {
+    errorEl.textContent = 'Network error. Please try again.';
+    errorEl.classList.add('visible');
+    btnEl.disabled = false;
+    btnEl.textContent = originalLabel;
+  }
 }
 
-function handleSubscribeBottom(event) {
-  event.preventDefault();
-  const email = document.getElementById('subscribeEmailBottom').value;
-  // Developer hook: send email to newsletter service (Beehiiv, ConvertKit, Mailchimp, etc.)
-  // fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) })
-  document.getElementById('emailFormBottom').style.display = 'none';
-  document.getElementById('emailConfirmBottom').classList.add('visible');
-}
-
-// Close modal on Escape key
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeModal();
 });
