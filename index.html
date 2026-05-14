@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<!-- reCAPTCHA v2 script -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <style>
 :root {
   color-scheme: light only;
@@ -695,17 +697,24 @@ h1 em {
   font-family: 'Cormorant Garamond', serif;
 }
 
-.captcha-placeholder {
-  background: rgba(13, 13, 13, 0.04);
-  border: 1px dashed #B8B5AE;
-  padding: 14px;
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #6B6B6B;
+.recaptcha-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 4px;
+}
+
+.form-status {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
   font-style: italic;
+  color: #6B6B6B;
+  text-align: center;
+  min-height: 18px;
+  margin-top: 4px;
+}
+
+.form-status.error {
+  color: #8B0000;
 }
 
 .modal button[type="submit"] {
@@ -725,6 +734,11 @@ h1 em {
 
 .modal button[type="submit"]:hover {
   opacity: 0.85;
+}
+
+.modal button[type="submit"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .modal-success {
@@ -1045,13 +1059,14 @@ h1 em {
           <textarea id="contactMessage" name="message" required></textarea>
         </div>
 
-        <!-- CAPTCHA placeholder — developer to replace with real reCAPTCHA or Cloudflare Turnstile widget -->
-        <div class="captcha-placeholder">
-          Captcha placeholder<br>
-          <span style="font-size: 9px; letter-spacing: 0.15em; opacity: 0.7;">developer: insert reCAPTCHA v2 or Turnstile widget here</span>
+        <!-- Google reCAPTCHA v2 widget -->
+        <div class="recaptcha-wrap">
+          <div class="g-recaptcha" data-sitekey="6Lf9IOosAAAAALN-Y48QL_rEChd990nKHh4KZdyh"></div>
         </div>
 
-        <button type="submit">Send</button>
+        <div class="form-status" id="contactStatus"></div>
+
+        <button type="submit" id="contactSubmit">Send</button>
       </form>
     </div>
 
@@ -1064,6 +1079,12 @@ h1 em {
 </div>
 
 <script>
+// ============================================================
+// CONFIGURATION — yeh GHL webhook URL paste karo
+// ============================================================
+const GHL_CONTACT_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/FohjpNz4MKnwQfqqVb31/webhook-trigger/3c2299bf-cd11-4067-bc3f-46401a379394';
+// ============================================================
+
 function openModal() {
   document.getElementById('contactModal').classList.add('visible');
   document.body.style.overflow = 'hidden';
@@ -1077,6 +1098,9 @@ function closeModal() {
     document.getElementById('modalFormView').style.display = 'block';
     document.getElementById('modalSuccessView').classList.remove('visible');
     document.getElementById('contactForm').reset();
+    if (window.grecaptcha) window.grecaptcha.reset();
+    document.getElementById('contactStatus').textContent = '';
+    document.getElementById('contactStatus').classList.remove('error');
   }, 300);
 }
 
@@ -1086,13 +1110,54 @@ function closeModalIfOverlay(event) {
   }
 }
 
-function handleContact(event) {
+async function handleContact(event) {
   event.preventDefault();
-  // Developer hook: send form data to backend / Formspree / Basin / your endpoint
-  // const formData = new FormData(event.target);
-  // fetch('/api/contact', { method: 'POST', body: formData })
-  document.getElementById('modalFormView').style.display = 'none';
-  document.getElementById('modalSuccessView').classList.add('visible');
+
+  const status = document.getElementById('contactStatus');
+  const submitBtn = document.getElementById('contactSubmit');
+  status.classList.remove('error');
+  status.textContent = '';
+
+  // reCAPTCHA token check
+  const captchaToken = window.grecaptcha && window.grecaptcha.getResponse();
+  if (!captchaToken) {
+    status.classList.add('error');
+    status.textContent = 'Please complete the captcha.';
+    return;
+  }
+
+  const payload = {
+    name: document.getElementById('contactName').value.trim(),
+    email: document.getElementById('contactEmail').value.trim(),
+    subject: document.getElementById('contactSubject').value.trim(),
+    message: document.getElementById('contactMessage').value.trim(),
+    source: 'blackburnwealth.com',
+    captchaToken: captchaToken,
+  };
+
+  submitBtn.disabled = true;
+  status.textContent = 'Sending…';
+
+  try {
+    const res = await fetch(GHL_CONTACT_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      document.getElementById('modalFormView').style.display = 'none';
+      document.getElementById('modalSuccessView').classList.add('visible');
+    } else {
+      status.classList.add('error');
+      status.textContent = 'Something went wrong. Please try again.';
+      submitBtn.disabled = false;
+    }
+  } catch (err) {
+    status.classList.add('error');
+    status.textContent = 'Network error. Please try again.';
+    submitBtn.disabled = false;
+  }
 }
 
 function handleSubscribe(event) {
