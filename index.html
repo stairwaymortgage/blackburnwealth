@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>Blackburn Wealth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light only;
+  --bg: #F4F1EA;
+  --ink: #0D0D0D;
+  --soft-ink: #1F1F1F;
+  --gray: #6B6B6B;
+  --light-gray: #B8B5AE;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: #F4F1EA !important;
+  color: #0D0D0D !important;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  padding: 0;
+  background-color: #F4F1EA !important;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(0,0,0,0.015) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.email-bar {
+  background: #0D0D0D;
+  color: #F4F1EA;
+  padding: 14px 24px;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.email-bar .label {
+  text-transform: uppercase;
+  font-family: 'Playfair Display', serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  opacity: 0.7;
+}
+
+.email-bar .label-italic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  opacity: 0.55;
+  font-weight: 300;
+}
+
+.email-form {
+  display: flex;
+  width: 100%;
+  max-width: 360px;
+  gap: 0;
+}
+
+.email-form input {
+  flex: 1;
+  background: transparent;
+  border: 1px solid #F4F1EA;
+  border-right: none;
+  color: #F4F1EA;
+  padding: 10px 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  outline: none;
+}
+
+.email-form input::placeholder {
+  color: rgba(244, 241, 234, 0.45);
+  font-style: italic;
+}
+
+.email-form button {
+  background: #F4F1EA;
+  color: #0D0D0D;
+  border: 1px solid #F4F1EA;
+  padding: 10px 18px;
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.email-form button:hover {
+  opacity: 0.85;
+}
+
+.email-confirm {
+  display: none;
+  font-size: 14px;
+  padding: 14px 20px;
+  border: 1px solid rgba(244, 241, 234, 0.35);
+  border-radius: 2px;
+  max-width: 360px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.email-confirm .confirm-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.email-confirm .confirm-body {
+  font-style: italic;
+  opacity: 0.95;
+  display: block;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+
+.email-confirm.visible {
+  display: block;
+}
+
+.masthead {
+  text-align: center;
+  padding: 36px 24px 6px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #0D0D0D;
+  position: relative;
+  z-index: 2;
+}
+
+.masthead-rule {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.masthead-rule::before, .masthead-rule::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: #0D0D0D;
+  margin: 6px 0;
+}
+
+.masthead-rule::after {
+  margin-top: 3px;
+}
+
+.dateline {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #6B6B6B;
+  padding: 12px 24px 0;
+  font-style: italic;
+  position: relative;
+  z-index: 2;
+}
+
+main {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1.0;
+  letter-spacing: -0.015em;
+  text-align: center;
+  margin-bottom: 18px;
+  color: #0D0D0D;
+}
+
+h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: #1F1F1F;
+}
+
+.subhead {
+  text-align: center;
+  font-style: italic;
+  font-size: 19px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: #1F1F1F;
+  opacity: 0.85;
+  margin-bottom: 8px;
+}
+
+.section-rule {
+  width: 50px;
+  height: 1px;
+  background: #0D0D0D;
+  margin: 32px auto;
+}
+
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: #B8B5AE;
+  margin: 64px 0 56px;
+  position: relative;
+}
+
+.section-divider::after {
+  content: '❦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #F4F1EA;
+  padding: 0 18px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #6B6B6B;
+}
+
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #0D0D0D;
+}
+
+.section-subhead {
+  text-align: center;
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 300;
+  letter-spacing: 0.015em;
+  color: #1F1F1F;
+  opacity: 0.8;
+}
+
+.body-copy strong {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #0D0D0D;
+  font-style: normal;
+  letter-spacing: 0.005em;
+}
+
+.body-copy {
+  font-size: 19px;
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  color: #0D0D0D;
+}
+
+.body-copy p {
+  margin-bottom: 20px;
+}
+
+.body-copy em {
+  font-style: italic;
+}
+
+.body-copy p:first-of-type::first-letter {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 64px;
+  float: left;
+  line-height: 0.9;
+  margin: 6px 8px -2px 0;
+  color: #0D0D0D;
+}
+
+.pullquote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.3;
+  text-align: center;
+  margin: 40px 0;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: #0D0D0D;
+}
+
+.pullquote::before, .pullquote::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: #0D0D0D;
+  margin: 20px auto;
+}
+
+.signature-block {
+  margin-top: 56px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #6B6B6B;
+  padding-top: 32px;
+  border-top: 1px solid #B8B5AE;
+}
+
+.signature-block a {
+  color: #0D0D0D;
+  text-decoration: none;
+  border-bottom: 1px solid #0D0D0D;
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+
+.signature-block a:hover {
+  opacity: 0.7;
+}
+
+.speaking {
+  margin-top: 36px;
+  font-style: italic;
+  font-size: 15px;
+  text-align: center;
+  color: #1F1F1F;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.speaking a {
+  color: #0D0D0D;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.speaking-block {
+  text-align: center;
+  margin: 0 auto;
+  padding: 8px 0 16px;
+}
+
+.speaking-block .section-heading {
+  font-size: 28px;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+.speaking-body {
+  font-size: 18px;
+  line-height: 1.65;
+  font-weight: 400;
+  color: #0D0D0D;
+  letter-spacing: 0.005em;
+  max-width: 480px;
+  margin: 0 auto 24px;
+}
+
+.speaking-cta {
+  font-style: italic;
+  font-size: 16px;
+  color: #1F1F1F;
+  letter-spacing: 0.01em;
+  font-weight: 300;
+}
+
+.speaking-cta a {
+  color: #0D0D0D;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  font-style: normal;
+}
+
+/* CHORUS OF TRADITIONS */
+.chorus-intro {
+  font-size: 19px;
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  color: #0D0D0D;
+  margin-bottom: 40px;
+}
+
+.chorus-divider {
+  text-align: center;
+  margin: 48px 0 32px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: #6B6B6B;
+  letter-spacing: 0.01em;
+  font-weight: 300;
+}
+
+.chorus-divider::before, .chorus-divider::after {
+  content: '';
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: #B8B5AE;
+  vertical-align: middle;
+  margin: 0 16px;
+}
+
+.tradition {
+  margin-bottom: 36px;
+}
+
+.tradition-label {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #0D0D0D;
+  text-align: center;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #B8B5AE;
+}
+
+.tradition-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 19px;
+  line-height: 1.55;
+  text-align: center;
+  color: #0D0D0D;
+  margin-bottom: 14px;
+  font-weight: 400;
+  letter-spacing: 0.003em;
+}
+
+.tradition-quote .attribution {
+  display: block;
+  font-style: normal;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: #6B6B6B;
+  margin-top: 6px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+
+.chorus-close {
+  font-size: 19px;
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  color: #0D0D0D;
+  margin-top: 48px;
+  text-align: center;
+}
+
+.chorus-benediction {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.4;
+  text-align: center;
+  color: #0D0D0D;
+  margin: 32px 0;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+.chorus-benediction::before, .chorus-benediction::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: #0D0D0D;
+  margin: 20px auto;
+}
+
+/* BOTTOM SUBSCRIBE BAR */
+.bottom-subscribe {
+  background: #0D0D0D;
+  color: #F4F1EA;
+  padding: 48px 24px 56px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+}
+
+.bottom-subscribe .label {
+  text-transform: uppercase;
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.bottom-subscribe .label-italic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+  opacity: 0.85;
+  font-weight: 300;
+  display: block;
+  max-width: 460px;
+  margin: 0 auto 24px;
+  line-height: 1.5;
+}
+
+.bottom-subscribe .email-form {
+  margin: 0 auto;
+}
+
+.bottom-subscribe .email-confirm {
+  margin-top: 16px;
+}
+
+/* MODAL STYLES */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(13, 13, 13, 0.75);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease;
+}
+
+.modal-overlay.visible {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: #F4F1EA;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 48px 36px 36px;
+  border: 1px solid #0D0D0D;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: #0D0D0D;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.modal h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin-bottom: 8px;
+  color: #0D0D0D;
+}
+
+.modal-subtitle {
+  text-align: center;
+  font-style: italic;
+  font-size: 15px;
+  color: #1F1F1F;
+  opacity: 0.75;
+  margin-bottom: 28px;
+}
+
+.modal-rule {
+  width: 40px;
+  height: 1px;
+  background: #0D0D0D;
+  margin: 0 auto 28px;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal label {
+  font-family: 'Playfair Display', serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6B6B6B;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.modal input, .modal textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #B8B5AE;
+  color: #0D0D0D;
+  padding: 12px 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal input:focus, .modal textarea:focus {
+  border-color: #0D0D0D;
+}
+
+.modal textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.captcha-placeholder {
+  background: rgba(13, 13, 13, 0.04);
+  border: 1px dashed #B8B5AE;
+  padding: 14px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6B6B6B;
+  font-style: italic;
+}
+
+.modal button[type="submit"] {
+  background: #0D0D0D;
+  color: #F4F1EA;
+  border: none;
+  padding: 14px 24px;
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 8px;
+  transition: opacity 0.2s;
+}
+
+.modal button[type="submit"]:hover {
+  opacity: 0.85;
+}
+
+.modal-success {
+  display: none;
+  text-align: center;
+  padding: 24px 0;
+}
+
+.modal-success.visible {
+  display: block;
+}
+
+.modal-success p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: #0D0D0D;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 46px; }
+  main { padding: 36px 24px 60px; }
+  .modal { padding: 40px 24px 28px; }
+  .modal h2 { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<div class="email-bar">
+  <span class="label">Subscribe to The Blackburn Wealth Letters</span>
+  <span class="label-italic">On identity, legacy, flow — and what wealth was supposed to mean.</span>
+  <form class="email-form" id="emailForm" onsubmit="handleSubscribe(event)">
+    <input type="email" id="subscribeEmail" placeholder="your email — no spam ever" required>
+    <button type="submit">Subscribe</button>
+  </form>
+  <div class="email-confirm" id="emailConfirm">
+    <span class="confirm-title">Almost there</span>
+    <span class="confirm-body">Please check your inbox to confirm your subscription.</span>
+  </div>
+</div>
+
+<div class="masthead-rule"></div>
+<div class="masthead">Blackburn Wealth</div>
+<div class="masthead-rule"></div>
+<div class="dateline">A quiet second voice on the original meaning of wealth.</div>
+
+<main>
+  <h1>Wealth,<br><em>Restored</em></h1>
+  <p class="subhead">The original meaning, recovered.</p>
+
+  <div class="section-rule"></div>
+
+  <div class="body-copy">
+    <p>Open Merriam-Webster. Look up the word <em>wealth</em>. You will find four definitions. The fourth — the one almost no one reads — says simply: <em>obsolete: weal, welfare.</em></p>
+
+    <p>That fourth entry is the original meaning of the word. Wealth used to mean well-being. To fare well. To be whole. The financial meaning came later, and over the centuries it grew so dominant that the original was demoted to obsolete. The dictionary itself records the corruption.</p>
+
+    <p class="pullquote">Wealth is not what you keep.<br>Wealth is what moves through you.</p>
+
+    <p>A cup that overflows is wealthy. A cup filled and sealed away is hoarding. A river is wealthy. A reservoir with the dam closed becomes a swamp. The water is the same in both. The wealth is in the movement.</p>
+
+    <p>When wealth meant well-being, a wealthy person was a person who flourished. When wealth means accumulated stuff, a wealthy person is a person with a bigger pile. Two different lives. Two different gods.</p>
+
+    <p>The recovery is small. One word, restored to its older meaning. From there, the rest follows on its own.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h2 class="section-heading">The Road to Creation</h2>
+  <p class="section-subhead">Nine steps, in order. Skip one and the chain breaks.</p>
+
+  <div class="section-rule"></div>
+
+  <div class="body-copy">
+    <p>Most teachings about manifestation skip eight steps and call the result a system. The real chain has nine, and each one has to be completed before the next can begin.</p>
+
+    <p><strong>Awareness.</strong> You cannot want what you cannot see. The first step is noticing — noticing the gap between where you are and where life could be larger.</p>
+
+    <p><strong>Desire.</strong> Awareness without longing produces only philosophy. Desire is the engine that turns <em>I see</em> into <em>I want</em>.</p>
+
+    <p><strong>Belief.</strong> Without belief that something is possible, desire stays in the realm of fantasy. Belief converts wanting into a live option.</p>
+
+    <p><strong>Choice.</strong> Many things are possible. Only some are chosen. Choice is the act of pointing the life at one of them.</p>
+
+    <p><strong>Elimination.</strong> Every yes is a thousand no's. What is being released to make room for what was chosen?</p>
+
+    <p><strong>Focus.</strong> With the field cleared, attention can finally rest on the one thing. Scattered focus produces scattered results.</p>
+
+    <p><strong>Emotion.</strong> Focus without feeling is mechanical. The feeling underneath the focus is the fuel that keeps the chain running when the work gets hard.</p>
+
+    <p><strong>Habits.</strong> Emotion is the spark. Habits are the engine. What is repeated daily is what is built.</p>
+
+    <p><strong>Commitment.</strong> The seal at the end. The decision to stay on the road when the road gets long. Without commitment, every prior step can be unwound.</p>
+
+    <p>These nine steps are how a life moves from <em>I noticed something</em> to <em>I built something real</em>. They are also how wealth, in the older sense, actually accumulates — flow is what happens when the chain is running clean. The cup overflows because the channel is open all the way down.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h2 class="section-heading">The Chain Beneath the Habit</h2>
+  <p class="section-subhead">Why most attempts to break a habit fail — and what works instead.</p>
+
+  <div class="section-rule"></div>
+
+  <div class="body-copy">
+    <p>Most people who try to break a habit attack the habit directly. They stop the coffee. They stop the drink. They stop the sugar. And for a few days, sometimes a few weeks, it works. Then the habit returns. They blame willpower. They blame stress. They blame themselves.</p>
+
+    <p>The reason almost no one names is the right one: the habit was never standing alone. It was the final link in a chain.</p>
+
+    <p>Consider three of the most common substances that hold people back — caffeine, alcohol, and sugar. Most people treat them as three separate habits. They are not. They are one loop, running in sequence. The morning coffee creates the afternoon jitter and the dehydration. The jitter and dehydration create the evening drink to come down. The drink creates the poor sleep and the next morning's sugar craving. The crash from the sugar and the bad sleep send the person back to the morning coffee. The loop runs forever, and the person fighting any single link is fighting the outcome instead of the cause.</p>
+
+    <p>The work is to <em>see the chain</em>. Trace the loop backward. Find the first link — the one upstream of everything else. That link is almost always smaller and easier to interrupt than the one that gets all the attention.</p>
+
+    <p>Cut the first link, and the rest of the chain stops producing on its own. No willpower required.</p>
+
+    <p>This is the same teaching as wealth-as-flow, in a different domain. Wealth is what moves through a clean channel. Health is what happens in a clean chain. In both cases, the work is upstream of the outcome. The outcome itself was never the lever.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h2 class="section-heading">The Flow That Came Before You</h2>
+  <p class="section-subhead">The teaching is incomplete without the upstream.</p>
+
+  <div class="section-rule"></div>
+
+  <div class="body-copy">
+    <p>Everything moving through you was given to you first.</p>
+
+    <p>The skills you built were built on tools and traditions handed down. The relationships you have rest on the ones your parents and their parents preserved long enough for you to be born into them. The capital you accumulate moves on infrastructure others laid. Even the language you think in was placed in your mouth before you could choose it.</p>
+
+    <p>Recognition of this is where flow actually begins. Not in what you give. In what you have already received.</p>
+
+    <p>Gratitude is not a feeling. It is the practice of seeing the upstream clearly. When the upstream is seen, the channel opens on its own. When the upstream is forgotten, the channel narrows no matter how much someone wants to give. The reservoir's dam closes from the top, not the bottom.</p>
+
+    <p>This is also why legacy is part of the teaching. The flow that reached you did not stop with you. Your responsibility is to keep it moving forward — through the work you do, the people you raise, the institutions you support, the capital you steward toward the next generation. Stewardship is the active form of gratitude. Cash flow forward is the active form of recognition that cash flowed in.</p>
+
+    <p>And the flow does not stop at the grave. The body ends. The channel does not. What you built keeps building. What you taught keeps teaching. What you gave keeps giving. The capital you stewarded continues to move. The children you raised raise children of their own. The institutions you supported support others after you. A life lived in flow does not need to be remembered to keep working — it keeps working because the water is still moving through the channel the person carved while they were here. The death of the body is just the moment the river stops being named after one of its turns.</p>
+
+    <p>The wealthy person in the older sense is the one who remembers both directions. They feel what came before. They send what comes through. The cup overflows because they know it was always being filled.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <h2 class="section-heading">The Chorus of Traditions</h2>
+  <p class="section-subhead">Every tradition that went deep enough arrived here.</p>
+
+  <div class="section-rule"></div>
+
+  <p class="chorus-intro">The recovery of <em>wealth</em> as <em>flourishing</em> is not new. It is one of the oldest teachings on earth. Every wisdom tradition, when it went deep enough, arrived at the same recognition: wealth is what moves through a life, not what stays in it. Listen to the chorus.</p>
+
+  <div class="tradition">
+    <div class="tradition-label">Hebrew</div>
+    <p class="tradition-quote">My cup runneth over.<span class="attribution">Psalm 23</span></p>
+    <p class="tradition-quote">There is one who scatters, yet increases more; and there is one who withholds more than is right, but it leads to poverty. The generous soul will be made rich.<span class="attribution">Proverbs 11:24–25</span></p>
+    <p class="tradition-quote">What does the Lord require of you? To act justly, and to love mercy, and to walk humbly with your God.<span class="attribution">Micah 6:8</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Christian</div>
+    <p class="tradition-quote">It is more blessed to give than to receive.<span class="attribution">Acts 20:35</span></p>
+    <p class="tradition-quote">Where your treasure is, there your heart will be also.<span class="attribution">Matthew 6:21</span></p>
+    <p class="tradition-quote">Freely you have received; freely give.<span class="attribution">Matthew 10:8</span></p>
+    <p class="tradition-quote">The measure you use, it will be measured back to you.<span class="attribution">Luke 6:38</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Islamic</div>
+    <p class="tradition-quote">The most beloved of people to Allah are those who are most beneficial to others.<span class="attribution">Hadith — Tabarani</span></p>
+    <p class="tradition-quote">Those who spend their wealth by night and day, secretly and openly — their reward is with their Lord.<span class="attribution">Qur'an 2:274</span></p>
+    <p class="tradition-quote">Wealth is not in having many possessions, but wealth is in self-sufficiency of the soul.<span class="attribution">Hadith — Bukhari</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Hindu</div>
+    <p class="tradition-quote">The wise see that there is action in the midst of inaction, and inaction in the midst of action.<span class="attribution">Bhagavad Gita 4:18</span></p>
+    <p class="tradition-quote">You have the right to work, but never to the fruit of work.<span class="attribution">Bhagavad Gita 2:47</span></p>
+    <p class="tradition-quote">The mind is everything. What you think, you become.<span class="attribution">Upanishadic tradition</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Buddhist</div>
+    <p class="tradition-quote">You only lose what you cling to.<span class="attribution">The Buddha</span></p>
+    <p class="tradition-quote">Thousands of candles can be lit from a single candle, and the life of the candle will not be shortened. Happiness never decreases by being shared.<span class="attribution">The Buddha</span></p>
+    <p class="tradition-quote">The root of suffering is attachment.<span class="attribution">The Second Noble Truth</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Taoist</div>
+    <p class="tradition-quote">The sage does not accumulate. The more he gives to others, the more he has.<span class="attribution">Tao Te Ching, Chapter 81</span></p>
+    <p class="tradition-quote">When you realize there is nothing lacking, the whole world belongs to you.<span class="attribution">Lao Tzu</span></p>
+    <p class="tradition-quote">Water flows on, and does not stop. This is its virtue.<span class="attribution">I Ching commentary</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Sikh</div>
+    <p class="tradition-quote">The truest wealth is to live in the presence of the Divine.<span class="attribution">Guru Granth Sahib</span></p>
+    <p class="tradition-quote">Earn with honesty, share with others, and remember the Divine.<span class="attribution">The Three Pillars</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Jain</div>
+    <p class="tradition-quote">Non-possession is one of the five great vows. Wealth held tightly becomes the cause of injury — to others, and to oneself.<span class="attribution">The teaching of aparigraha</span></p>
+    <p class="tradition-quote">All souls are equal. Live and let live.<span class="attribution">Mahavira</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Sufi &amp; Mystic</div>
+    <p class="tradition-quote">You are not a drop in the ocean. You are the entire ocean in a drop.<span class="attribution">Rumi</span></p>
+    <p class="tradition-quote">Sell your cleverness and buy bewilderment.<span class="attribution">Rumi</span></p>
+    <p class="tradition-quote">The wound is the place where the light enters you.<span class="attribution">Rumi</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Indigenous</div>
+    <p class="tradition-quote">Mitákuye Oyás'iŋ — we are all related.<span class="attribution">Lakota</span></p>
+    <p class="tradition-quote">The frog does not drink up the pond in which it lives.<span class="attribution">Native American proverb</span></p>
+    <p class="tradition-quote">When you were born, you cried and the world rejoiced. Live your life so that when you die, the world cries and you rejoice.<span class="attribution">Cherokee tradition</span></p>
+  </div>
+
+  <div class="chorus-divider">and the same recognition arrives in voices beyond the religious traditions</div>
+
+  <div class="tradition">
+    <div class="tradition-label">Stoic</div>
+    <p class="tradition-quote">What we do now echoes in eternity.<span class="attribution">Marcus Aurelius</span></p>
+    <p class="tradition-quote">He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has.<span class="attribution">Epictetus</span></p>
+    <p class="tradition-quote">Wealth consists not in having great possessions, but in having few wants.<span class="attribution">Epictetus</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Classical &amp; Humanist</div>
+    <p class="tradition-quote">The unexamined life is not worth living.<span class="attribution">Socrates</span></p>
+    <p class="tradition-quote">Only a life lived for others is a life worthwhile.<span class="attribution">Albert Einstein</span></p>
+    <p class="tradition-quote">Try not to become a man of success, but rather try to become a man of value.<span class="attribution">Albert Einstein</span></p>
+    <p class="tradition-quote">We are a way for the cosmos to know itself.<span class="attribution">Carl Sagan</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Transcendentalist</div>
+    <p class="tradition-quote">The only true gift is a portion of thyself.<span class="attribution">Ralph Waldo Emerson</span></p>
+    <p class="tradition-quote">I went to the woods because I wished to live deliberately.<span class="attribution">Henry David Thoreau</span></p>
+    <p class="tradition-quote">I am large, I contain multitudes.<span class="attribution">Walt Whitman</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Contemplative &amp; Spiritual</div>
+    <p class="tradition-quote">Tell me, what is it you plan to do with your one wild and precious life?<span class="attribution">Mary Oliver</span></p>
+    <p class="tradition-quote">You are something the whole universe is doing, in the same way that a wave is something the whole ocean is doing.<span class="attribution">Alan Watts</span></p>
+    <p class="tradition-quote">The cave you fear to enter holds the treasure you seek.<span class="attribution">Joseph Campbell</span></p>
+    <p class="tradition-quote">Between stimulus and response there is a space. In that space is our power to choose our response.<span class="attribution">Viktor Frankl</span></p>
+  </div>
+
+  <div class="tradition">
+    <div class="tradition-label">Modern</div>
+    <p class="tradition-quote">We make a living by what we get. We make a life by what we give.<span class="attribution">Winston Churchill</span></p>
+    <p class="tradition-quote">The two most important days in your life are the day you are born and the day you find out why.<span class="attribution">Mark Twain</span></p>
+    <p class="tradition-quote">The meaning of life is to find your gift. The purpose of life is to give it away.<span class="attribution">Pablo Picasso</span></p>
+    <p class="tradition-quote">Money is like manure. It's not worth a thing unless it's spread around encouraging young things to grow.<span class="attribution">Thornton Wilder</span></p>
+  </div>
+
+  <p class="chorus-close">The teaching is not sectarian. The teaching is not modern. The teaching is not even mystical. It is what every tradition figured out the moment it stopped chasing the pile and started watching the flow.</p>
+
+  <p class="chorus-benediction">This is the chorus your money has been waiting to hear.</p>
+
+  <div class="section-divider"></div>
+
+  <div class="speaking-block">
+    <h2 class="section-heading">For Speakers' Bureaus, Advisors, and Family Offices</h2>
+    <p class="speaking-body">Jim opens financial seminars and private gatherings with a twenty-minute reframe on the original meaning of wealth — the foundation that gives every wealth-planning conversation that follows it more depth and more conviction.</p>
+    <p class="speaking-cta">To inquire about a seminar, retreat, or private event, please <a onclick="openModal()">write to us</a>.</p>
+  </div>
+
+  <div class="signature-block">
+    <a href="https://jamesjblackburn.com" target="_blank" rel="noopener">James Blackburn</a>
+  </div>
+</main>
+
+<!-- BOTTOM SUBSCRIBE BAR -->
+<div class="bottom-subscribe">
+  <span class="label">Subscribe to the Blackburn Wealth Letters</span>
+  <span class="label-italic">On identity, legacy, flow — and what wealth was supposed to mean.</span>
+  <form class="email-form" id="emailFormBottom" onsubmit="handleSubscribeBottom(event)">
+    <input type="email" id="subscribeEmailBottom" placeholder="your email — no spam ever" required>
+    <button type="submit">Subscribe</button>
+  </form>
+  <div class="email-confirm" id="emailConfirmBottom">
+    <span class="confirm-title">Almost there</span>
+    <span class="confirm-body">Please check your inbox to confirm your subscription.</span>
+  </div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contactModal" onclick="closeModalIfOverlay(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+
+    <div id="modalFormView">
+      <h2>Write to us</h2>
+      <p class="modal-subtitle">Speaking inquiries, introductions, and personal correspondence.</p>
+      <div class="modal-rule"></div>
+
+      <form id="contactForm" onsubmit="handleContact(event)">
+        <div>
+          <label for="contactName">Name</label>
+          <input type="text" id="contactName" name="name" required>
+        </div>
+        <div>
+          <label for="contactEmail">Email</label>
+          <input type="email" id="contactEmail" name="email" required>
+        </div>
+        <div>
+          <label for="contactSubject">Subject</label>
+          <input type="text" id="contactSubject" name="subject" required>
+        </div>
+        <div>
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" name="message" required></textarea>
+        </div>
+
+        <!-- CAPTCHA placeholder — developer to replace with real reCAPTCHA or Cloudflare Turnstile widget -->
+        <div class="captcha-placeholder">
+          Captcha placeholder<br>
+          <span style="font-size: 9px; letter-spacing: 0.15em; opacity: 0.7;">developer: insert reCAPTCHA v2 or Turnstile widget here</span>
+        </div>
+
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <div class="modal-success" id="modalSuccessView">
+      <h2>Thank you</h2>
+      <div class="modal-rule"></div>
+      <p>Your message has been received.<br>We will reply personally.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('contactModal').classList.add('visible');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('contactModal').classList.remove('visible');
+  document.body.style.overflow = '';
+  // Reset to form view in case user closes after success
+  setTimeout(() => {
+    document.getElementById('modalFormView').style.display = 'block';
+    document.getElementById('modalSuccessView').classList.remove('visible');
+    document.getElementById('contactForm').reset();
+  }, 300);
+}
+
+function closeModalIfOverlay(event) {
+  if (event.target.id === 'contactModal') {
+    closeModal();
+  }
+}
+
+function handleContact(event) {
+  event.preventDefault();
+  // Developer hook: send form data to backend / Formspree / Basin / your endpoint
+  // const formData = new FormData(event.target);
+  // fetch('/api/contact', { method: 'POST', body: formData })
+  document.getElementById('modalFormView').style.display = 'none';
+  document.getElementById('modalSuccessView').classList.add('visible');
+}
+
+function handleSubscribe(event) {
+  event.preventDefault();
+  const email = document.getElementById('subscribeEmail').value;
+  // Developer hook: send email to newsletter service (Beehiiv, ConvertKit, Mailchimp, etc.)
+  // fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) })
+  document.getElementById('emailForm').style.display = 'none';
+  document.getElementById('emailConfirm').classList.add('visible');
+}
+
+function handleSubscribeBottom(event) {
+  event.preventDefault();
+  const email = document.getElementById('subscribeEmailBottom').value;
+  // Developer hook: send email to newsletter service (Beehiiv, ConvertKit, Mailchimp, etc.)
+  // fetch('/api/subscribe', { method: 'POST', body: JSON.stringify({ email }) })
+  document.getElementById('emailFormBottom').style.display = 'none';
+  document.getElementById('emailConfirmBottom').classList.add('visible');
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+
+</body>
+</html>
